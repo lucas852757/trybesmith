@@ -12,10 +12,15 @@ export default class ProductModel {
 
   public async create(object: Units): Promise<Product> {
     const { name, amount } = object;
-    const query = 'insert into Trybesmith.Products (name, aount) values (?, ?)';
+    const query = 'insert into Trybesmith.Products (name, amount) values (?, ?)';
     const result = await this.connection.query<ResultSetHeader>(query, [name, amount]); 
     const [dataInserted] = result;
     const { insertId } = dataInserted;
     return { id: insertId, ...object };
+  }
+
+  public async getAll():Promise<Product[]> {
+    const [result] = await this.connection.query('select * from Trybesmith.Products');
+    return result as Product[];
   }
 }
