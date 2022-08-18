@@ -10,7 +10,8 @@ export default class UserModel {
 
   public async createUeser(object: Register):Promise<Register> {
     const { username, classe, level, password } = object;
-    const query = 'insert into Trybesmith.User (username, classe, level, password)';
+    const query = 'insert into Trybesmith.Users '
+    + '(username, classe, level, password) values (?,?,?,?)';
     const result = await this.connection.query<ResultSetHeader>(query, [username, 
       classe, level, password]);
     const [dataInserted] = result;
