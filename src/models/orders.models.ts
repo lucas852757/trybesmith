@@ -1,6 +1,6 @@
 import { Pool } from 'mysql2/promise';
 
-export default class Orders { 
+export default class OrderModel { 
   public connection: Pool;
 
   constructor(connection: Pool) {

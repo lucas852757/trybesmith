@@ -2,11 +2,13 @@
 import express from 'express';
 import routesProducts from '../routes/routes.products';
 import routesUsers from '../routes/routes.users'; 
+import routesOrders from '../routes/routes.orders';
 
 const app = express();
 
 app.use(express.json());
 app.use('/products', routesProducts);
 app.use('/users', routesUsers);
+app.use('/orders', routesOrders);
 
 export default app;
