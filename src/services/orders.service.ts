@@ -10,6 +10,7 @@ export default class OrderService {
 
   public async getAll():Promise<[]> {
     const result = await this.models.getAll();
+    
     return result;
   }
 }
