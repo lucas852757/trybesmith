@@ -5,7 +5,7 @@ import Token from '../../interfaces/token.interface';
 import connection from '../models/connection';
 import LoginModel from '../models/login.models';
 
-export default class Login {
+export default class LoginService {
   models: LoginModel;
 
   constructor() {
