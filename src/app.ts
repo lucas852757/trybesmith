@@ -3,6 +3,7 @@ import express from 'express';
 import routesProducts from '../routes/routes.products';
 import routesUsers from '../routes/routes.users'; 
 import routesOrders from '../routes/routes.orders';
+import error from './middlewares/errorMiddlewares';
 
 const app = express();
 
@@ -12,4 +13,5 @@ app.use('/products', routesProducts);
 app.use('/users', routesUsers);
 app.use('/orders', routesOrders);
 
+app.use(error);
 export default app;
