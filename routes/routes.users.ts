@@ -7,7 +7,7 @@ const router = Router();
 const userController = new UserController();
 const loginController = new LoginController();
 
-router.post('/login', loginController.login);
+router.post('/', loginController.login);
 router.post('/', userController.createUser);
 
 export default router;
