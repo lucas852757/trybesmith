@@ -1,5 +1,5 @@
 interface LoginAcess {
-  id: string,
+  password: string,
   username: string,
 }
 
