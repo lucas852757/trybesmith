@@ -1,5 +1,5 @@
 interface LoginReturn {
-  id: number,
+  password: number,
   username: number,
 }
 
