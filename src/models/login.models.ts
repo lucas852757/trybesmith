@@ -2,7 +2,7 @@ import { Pool, RowDataPacket } from 'mysql2/promise';
 import LoginAcess from '../../interfaces/login.interface';
 import LoginReturn from '../../interfaces/login.return.interface';
 
-export default class Login {
+export default class LoginModel {
   public connection: Pool;
 
   constructor(connection: Pool) {
