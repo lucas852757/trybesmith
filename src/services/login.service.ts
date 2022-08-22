@@ -11,21 +11,25 @@ export default class LoginService {
   constructor() {
     this.models = new LoginModel(connection);
   }
-
+  
   public login = async (object: LoginAcess): Promise<Token> => {
+    const a: string[] = [];
     const secret = 'suaSenhaSecreta';
     const result = await this.models.login(object);
+    
     const { password, username } = object;
+    console.log(a.push(password));
     const schema = Joi.object({
       password: Joi.string().not().empty().required(),
       username: Joi.string().not().empty().required(),
     });
     await schema.validateAsync({ password, username });
-    if (!result.password || !result.username) {
+    if (typeof result === 'undefined' || !(a.includes(result.password))) {
       const error = new Error('Username or password invalid');
       error.name = 'UnauthorizedUserError';
+      throw error;
     }
-    
+  
     const resultOb = await this.models.login(object);
     const token = jwt.sign({ data: resultOb }, secret as string);
     return { token };
