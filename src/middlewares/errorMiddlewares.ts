@@ -19,7 +19,7 @@ const middlewareOfError = async (
   _next: NextFunction,
 ) => {
   // console.log('------>', (<ErrorMiddleware>err).isJoi);
-  console.log((<ErrorMiddleware>err).details[0].type);
+
   // Joi
   if ((<ErrorMiddleware>err).isJoi) { // (<ErrorMiddleware>err).name
     const status = await errors[(<ErrorMiddleware>err).details[0].type as keyof typeof errors];
