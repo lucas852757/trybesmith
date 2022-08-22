@@ -4,11 +4,12 @@ import routesProducts from '../routes/routes.products';
 import routesUsers from '../routes/routes.users'; 
 import routesOrders from '../routes/routes.orders';
 import error from './middlewares/errorMiddlewares';
+import routesLogin from '../routes/routes.login';
 
 const app = express();
 
 app.use(express.json());
-app.use('/login', routesUsers);
+app.use('/login', routesLogin);
 app.use('/products', routesProducts);
 app.use('/users', routesUsers);
 app.use('/orders', routesOrders);

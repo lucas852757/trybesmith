@@ -1,6 +1,6 @@
 interface LoginReturn {
-  password: number,
-  username: number,
+  password: string,
+  username: string,
 }
 
 export default LoginReturn;
