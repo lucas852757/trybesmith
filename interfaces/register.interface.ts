@@ -2,7 +2,7 @@ interface Register {
   id?: number,
   username: string,
   classe: string,
-  level: 10,
+  level: number,
   password: string
 }
 
