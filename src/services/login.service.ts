@@ -18,7 +18,7 @@ export default class LoginService {
     const result = await this.models.login(object);
     
     const { password, username } = object;
-    console.log(a.push(password));
+    a.push(password);
     const schema = Joi.object({
       password: Joi.string().not().empty().required(),
       username: Joi.string().not().empty().required(),
@@ -27,6 +27,7 @@ export default class LoginService {
     if (typeof result === 'undefined' || !(a.includes(result.password))) {
       const error = new Error('Username or password invalid');
       error.name = 'UnauthorizedUserError';
+      
       throw error;
     }
   
