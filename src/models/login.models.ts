@@ -11,10 +11,10 @@ export default class LoginModel {
 
   public login = async (object: LoginAcess):Promise<LoginReturn> => {
     const { username } = object;
-    console.log(username);
+ 
     const query = 'select password, username from Trybesmith.Users where username=?';
     const [[result]] = await this.connection.query<RowDataPacket[]>(query, [username]);
-    console.log('->', result);
+
     return result as LoginReturn;
   };
 }
