@@ -1,5 +1,6 @@
 import { Pool, RowDataPacket } from 'mysql2/promise';
 import Order from '../../interfaces/order.interface';
+import RegisterProducts from '../../interfaces/register.products';
 
 export default class OrderModel { 
   public connection: Pool;
@@ -29,7 +30,26 @@ export default class OrderModel {
       // console.log(object.productsIds);
       return object;
     })); 
-    console.log(r);
+    // console.log(r)
     return r as [];
   }
+
+  public create = async (
+    id:number, 
+    // userId:number, 
+    productsIds: number[],
+  ):Promise<RegisterProducts> => {
+    const queryOrder = 'insert into Trybesmith.Orders (userId) values (?)';
+    const [[insertId]] = await this.connection.query<RowDataPacket[]>(queryOrder, [id]);
+
+    const result = productsIds.map(async (_productId) => {
+      const queryProducts = 'insert into Trybesmith.Products (orderId, ) values (?)';
+      await this
+        .connection.query<RowDataPacket[]>(queryProducts, [insertId]);
+    });
+    return ({
+      userId: id,
+      productsIds: [...[result]],
+    });
+  };
 }
