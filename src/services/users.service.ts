@@ -14,7 +14,8 @@ export default class UserService {
   public async createUser(object: Register):Promise<Token> {
     const insertUser = await this.model.createUeser(object);
 
-    const secret = process.env.JWT_SECRET;
+    // const secret = process.env.JWT_SECRET;
+    const secret = 'suaSenhaSecreta';
     /* https://stackoverflow.com/questions/66328425/jwt-argument-of-type-string-undefined-is-not-assignable-to-parameter-of-typ */
     const token = jwt.sign({ data: insertUser }, secret as string);
     return { token };
