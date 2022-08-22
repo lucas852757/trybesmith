@@ -13,15 +13,16 @@ export default class UserService {
   }
 
   public async createUser(object: Register):Promise<Token> {
-    const { username, classe, level } = object;
+    const { username, classe, level, password } = object;
     const schema = Joi.object({
       username: Joi.string().min(3).not().empty()
         .required(), 
       classe: Joi.string().min(3).not().empty()
         .required(),
       level: Joi.number().min(1).not().empty()
-        .required() });
-    await schema.validateAsync({ username, classe, level });
+        .required(),
+      password: Joi.string().min(8).required() });
+    await schema.validateAsync({ username, classe, level, password });
     
     const insertUser = await this.model.createUeser(object);
     // const secret = process.env.JWT_SECRET;
