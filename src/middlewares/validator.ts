@@ -5,8 +5,8 @@
 
 import { Request, Response, NextFunction } from 'express';
 import { Pool, RowDataPacket } from 'mysql2/promise';
-import jsonWebToken from 'jsonwebtoken';
-import JwtVerify from '../../interfaces/jwt.verify.interface';
+import jsonWebToken, { JwtPayload } from 'jsonwebtoken';
+// import JwtVerify from '../../interfaces/jwt.verify.interface';
 import NewFeatures from '../../interfaces/req.user.intererface';
 
 const secret = 'suaSenhaSecreta';
@@ -23,18 +23,19 @@ export default class Validator {
     if (!token) {
       return res.status(401).json({ error: 'Token not found' });
     }
+    console.log(token);
     try {
-      const decoded = jsonWebToken.verify(token, secret);
-      const { username } = (<JwtVerify>decoded);
+      const decoded = jsonWebToken.verify(token, secret) as JwtPayload;
+    
+      const { username } = decoded.data;
       const query = 'select id, username, password from Trybesmith.Users where username=?';
       const [[object]] = await this.connection.query<RowDataPacket[]>(query, [username]);
-
-      if (!object.username || object.password) {
+      if (!object.username || !object.password) {
         res.status(401).json({ message: 'Username or password invalid' });
-      }
+      } 
       // (<NewFeatures>req).user = object.username;
       // (<NewFeatures>req).password = object.password;
-      (<NewFeatures>req).password = object.id;
+      (<NewFeatures>req).id = object.id;
       next();
     } catch (error) {
       // console.log(error);
