@@ -39,7 +39,7 @@ export default class Validator {
       next();
     } catch (error) {
       // console.log(error);
-      return res.status(401).json({ message: 'Expired or invalid token' });
+      return res.status(401).json({ message: 'Invalid token' });
     }
   };
 }
