@@ -14,6 +14,7 @@ export default class OrderController {
     try {
       // const { body } = req;
       const { id, body } = (<NewFeatures>req);
+      console.log(id, body);
       const response = await this.orderService.create(id, body);
       return res.status(201).json(response);
     } catch (error) {
