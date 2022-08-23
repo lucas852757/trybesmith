@@ -12,7 +12,7 @@ export default class LoginModel {
   public login = async (object: LoginAcess):Promise<LoginReturn> => {
     const { username } = object;
  
-    const query = 'select password, username from Trybesmith.Users where username=?';
+    const query = 'select id, password, username from Trybesmith.Users where username=?';
     const [[result]] = await this.connection.query<RowDataPacket[]>(query, [username]);
 
     return result as LoginReturn;
