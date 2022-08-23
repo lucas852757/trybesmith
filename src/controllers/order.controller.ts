@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import NewFeatures from '../../interfaces/req.user.intererface';
 import OrderService from '../services/orders.service';
 
@@ -10,7 +10,7 @@ export default class OrderController {
     return res.status(200).json(response);
   };
 
-  public create = async (req: Request, res: Response, next: NewableFunction) => {
+  public create = async (req: Request, res: Response, next: NextFunction) => {
     try {
       // const { body } = req;
       const { id, body } = (<NewFeatures>req);
