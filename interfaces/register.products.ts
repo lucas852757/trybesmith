@@ -1,6 +1,6 @@
 interface RegisterProducts {
   userId: number,
-  productsIds: Promise<void>[][];
+  productsIds: number[];
 }
 
 export default RegisterProducts;
