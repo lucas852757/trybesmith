@@ -26,14 +26,15 @@ export default class Validator {
     try {
       const decoded = jsonWebToken.verify(token, secret);
       const { username } = (<JwtVerify>decoded);
-      const query = 'select username, password from Trybesmith.Users where username=?';
+      const query = 'select id, username, password from Trybesmith.Users where username=?';
       const [[object]] = await this.connection.query<RowDataPacket[]>(query, [username]);
 
       if (!object.username || object.password) {
         res.status(401).json({ message: 'Username or password invalid' });
       }
-      (<NewFeatures>req).user = object.username;
-      (<NewFeatures>req).password = object.password;
+      // (<NewFeatures>req).user = object.username;
+      // (<NewFeatures>req).password = object.password;
+      (<NewFeatures>req).password = object.id;
       next();
     } catch (error) {
       // console.log(error);
