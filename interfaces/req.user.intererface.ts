@@ -2,6 +2,7 @@
 import express from 'express';
 
 interface NewFeatures extends express.Request {
+  id: number,
   user: string,
   password: string,
 }
