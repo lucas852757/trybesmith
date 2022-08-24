@@ -21,9 +21,9 @@ export default class Validator {
   public validator = async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization;
     if (!token) {
-      return res.status(401).json({ error: 'Token not found' });
+      return res.status(401).json({ message: 'Token not found' });
     }
-    console.log(token);
+
     try {
       const decoded = jsonWebToken.verify(token, secret) as JwtPayload;
     
