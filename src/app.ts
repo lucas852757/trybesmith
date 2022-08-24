@@ -5,16 +5,13 @@ import routesUsers from '../routes/routes.users';
 import routesOrders from '../routes/routes.orders';
 import error from './middlewares/errorMiddlewares';
 import routesLogin from '../routes/routes.login';
-import Validator from './middlewares/validator';
-import connection from './models/connection';
 
 const app = express();
-const validator = new Validator(connection);
 app.use(express.json());
 app.use('/login', routesLogin);
 app.use('/products', routesProducts);
 app.use('/users', routesUsers);
-app.use('/orders', validator.validator, routesOrders);
+app.use('/orders', routesOrders);
 
 app.use(error);
 export default app;

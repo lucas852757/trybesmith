@@ -10,6 +10,8 @@ const errors = {
   'number.min': 422,
   'number.base': 422,
   'any.required': 400,
+  'array.base': 422,
+  'array.includesRequiredUnknowns': 422,
 };
 
 const middlewareOfError = async (
