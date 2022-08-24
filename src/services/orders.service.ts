@@ -1,3 +1,4 @@
+import Joi from 'joi';
 import RegisterProducts from '../../interfaces/register.products';
 import connection from '../models/connection';
 import OrderModel from '../models/orders.models';
@@ -15,8 +16,19 @@ export default class OrderService {
     return result;
   }
 
-  public create = async (id: number, object: { productsIds:[] }): Promise<RegisterProducts> => {
+  public create = async (
+    id: number, 
+    object: { productsIds:number[] },
+  ): Promise<RegisterProducts> => {
     const { productsIds } = object;
+    const schema = Joi.object({
+      productsIds: Joi.array().items(Joi.number().required()).required()
+        .messages({ 'array.includesRequiredUnknowns': '"productsIds" must include only numbers' }),
+    });
+
+    const { error } = schema.validate({ productsIds });
+    console.log(error);
+    await schema.validateAsync({ productsIds });
     const result = await this.models.create(id, productsIds);
     return result;
   };
