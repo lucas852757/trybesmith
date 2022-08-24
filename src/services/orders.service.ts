@@ -26,8 +26,8 @@ export default class OrderService {
         .messages({ 'array.includesRequiredUnknowns': '"productsIds" must include only numbers' }),
     });
 
-    const { error } = schema.validate({ productsIds });
-    console.log(error);
+    /* const { error } = schema.validate({ productsIds });
+    console.log(error); */
     await schema.validateAsync({ productsIds });
     const result = await this.models.create(id, productsIds);
     return result;
